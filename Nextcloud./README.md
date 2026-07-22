@@ -19,6 +19,11 @@ LXC (Linux Containers) is a lightweight virtualization method built into Proxmox
 | RAM | 1 GB |
 | Storage | HDD (`/mnt/hdd1`) |
 
+
+![Nextcloud container running on Proxmox](images/proxmox-container.png)
+
+
+
 ## Setup
 
 ### 1. Download the TurnKey Template
