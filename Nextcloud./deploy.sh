@@ -20,7 +20,7 @@ set -e  # exit immediately if any command fails
 
 # -------------------- PARSE CONFIG --------------------
 # Reads values from config.yaml in the same directory
-# Uses grep + awk so we don't need a yaml parser installed
+# Uses grep + awk so we don't need a YAML parser installed
 # Only works with flat "key: value" pairs (no nested objects)
 
 CONFIG="$(dirname "$0")/config.yaml"
@@ -31,6 +31,8 @@ if [ ! -f "$CONFIG" ]; then
     exit 1
 fi
 
+
+
 # parse_yaml pulls a value from config.yaml by key name
 # example: parse_yaml "hostname" returns "nextcloud"
 parse_yaml() {
@@ -39,7 +41,6 @@ parse_yaml() {
 
 CTID=$(parse_yaml "id")
 HOSTNAME=$(parse_yaml "hostname")
-PASSWORD=$(parse_yaml "password")
 CORES=$(parse_yaml "cores")
 RAM=$(parse_yaml "ram")
 SWAP=$(parse_yaml "swap")
@@ -52,7 +53,37 @@ BRIDGE=$(parse_yaml "bridge")
 IP=$(parse_yaml "ip")
 GATEWAY=$(parse_yaml "gateway")
 
+
+
+
+# password is never stored in config files — always prompted at runtime
+# read -s hides the input so nobody can shoulder-surf or see it in terminal history
+# read -p prints the prompt text before waiting for input
+
+
+echo ""
+read -s -p "Enter root password for container: " PASSWORD
+echo ""
+read -s -p "Confirm password: " PASSWORD_CONFIRM
+echo ""
+
+if [ "$PASSWORD" != "$PASSWORD_CONFIRM" ]; then
+    echo "ERROR: Passwords do not match."
+    exit 1
+fi
+
+if [ -z "$PASSWORD" ]; then
+    echo "ERROR: Password cannot be empty."
+    exit 1
+fi
+
+
+
 # -------------------------------------------------------
+
+
+
+
 
 
 
@@ -72,6 +103,8 @@ echo ""
 echo ""
 echo " [1/7] Updating template list..."
 pveam update
+
+
 
 
 
@@ -109,6 +142,8 @@ fi
 
 
 
+
+
 # --- Step 2: Create the host data directory ---
 echo ""
 echo "[3/7] Preparing host data directory..."
@@ -118,6 +153,9 @@ if [ ! -d "$HOST_DATA_DIR" ]; then
 else
     echo "$HOST_DATA_DIR already exists, skipping."
 fi
+
+
+
 
 
 
@@ -134,6 +172,7 @@ if pct status "$CTID" &>/dev/null; then
     echo "Either change the CTID or remove the existing container first."
     exit 1
 fi
+
 
 
 # set up network string
@@ -164,11 +203,13 @@ echo "Container created."
 
 
 
+
 # --- Step 4: Add the data drive mount point ---
 echo ""
 echo "[5/7] Mounting data drive into container..."
 pct set "$CTID" -mp0 "$HOST_DATA_DIR,mp=$CONTAINER_DATA_DIR"
 echo "Mounted $HOST_DATA_DIR → $CONTAINER_DATA_DIR"
+
 
 
 
@@ -183,6 +224,7 @@ pct start "$CTID"
 
 
 
+
 # wait for the container to fully boot
 echo "Waiting for container to boot..."
 sleep 15
@@ -193,9 +235,12 @@ sleep 15
 
 
 
+
+
 # --- Step 6: Run post-boot setup inside the container ---
 echo ""
 echo "[7/7] Running post-boot configuration..."
+
 
 
 
@@ -234,7 +279,5 @@ echo "  3. Add the Tailscale IP to trusted_domains in:"
 echo "     /var/www/nextcloud/config/config.php"
 echo ""
 echo "========================================="
-
-
 
 
