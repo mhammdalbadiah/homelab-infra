@@ -9,7 +9,6 @@ nextcloud/
 ├── README.md            # this file — full setup walkthrough
 ├── config.yaml          # all container settings (deploy.sh reads from this)
 ├── deploy.sh            # automated deployment script (run on Proxmox host)
-├── nextcloud.conf       # Proxmox LXC config (copy to /etc/pve/lxc/<CTID>.conf)
 └── images/
     └── proxmox-container.png
 ```
