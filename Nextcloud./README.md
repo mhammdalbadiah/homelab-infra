@@ -1,6 +1,19 @@
 # Nextcloud
 
-My self-hosted cloud storage. Runs as a TurnKey LXC on Proxmox — basically my own private Google Drive. All my files and photos stay on my hardware, nothing goes to a third party.
+My self-hosted cloud storage. Runs as a TurnKey LXC on Proxmox basically my own private Google Drive. All my files and photos stay on my hardware, nothing goes to a third party
+
+## Files
+ 
+```
+nextcloud/
+├── README.md            # this file — full setup walkthrough
+├── config.yaml          # all container settings (deploy.sh reads from this)
+├── deploy.sh            # automated deployment script (run on Proxmox host)
+├── nextcloud.conf       # Proxmox LXC config (copy to /etc/pve/lxc/<CTID>.conf)
+└── images/
+    └── proxmox-container.png
+```
+
 
 ## Why
 
