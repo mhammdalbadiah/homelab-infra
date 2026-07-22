@@ -1,0 +1,26 @@
+# LocalStack LXC Configuration
+# deploy.sh reads from this file — edit your values here
+
+container:
+  id: 101
+  hostname: localstack
+  # password is prompted at runtime — never stored in files
+
+resources:
+  cores: 2
+  ram: 1024                  # in MB
+  swap: 512                  # in MB
+  disk_size: 8               # root disk in GB
+
+storage:
+  lvm: local-lvm             # Proxmox storage for the container disk
+  templates: local           # where templates are stored
+
+network:
+  bridge: vmbr0
+  ip: dhcp                   # static IP (CIDR) or "dhcp"
+  gateway: 192.168.1.1       # ignored if using DHCP
+
+localstack:
+  version: "3.8"
+  services: s3,iam,lambda,dynamodb,sqs,sns,cloudformation,cloudwatch
