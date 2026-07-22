@@ -1,0 +1,23 @@
+# Nextcloud LXC Configuration
+# deploy.sh reads from this file "edit your values here"
+
+container:
+  id: 110
+  hostname: nextcloud         # password is prompted at runtime  "never stored in files"
+
+resources:
+  cores: 1
+  ram: 1024                  # in MB
+  swap: 512                  # in MB
+  disk_size: 8               # root disk in GB
+
+storage:
+  lvm: local-lvm                     # Proxmox storage for the container disk
+  templates: local                   # where templates are stored
+  host_data: /mnt/hdd1/nextcloud     # path on the Proxmox host
+  container_data: /mnt/data          # where it appears inside the container
+
+network:
+  bridge: vmbr0
+  ip: 192.168.1.50/24        # static IP "CIDR" , or "dhcp"
+  gateway: 192.168.1.1       # ignored if using DHCP
