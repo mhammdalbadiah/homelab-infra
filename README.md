@@ -2,6 +2,10 @@
 
 Production-grade self-hosted infrastructure running on bare-metal hardware in Riyadh, Saudi Arabia. Built for hands-on Cloud, DevOps, and Security engineering.
 
+![Server Setup](images/Server-Setup.png)
+![Inside the Case](images/Inside-Server-case.png)
+
+
 ---
 
 ## Architecture
