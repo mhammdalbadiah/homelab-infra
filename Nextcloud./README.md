@@ -1,5 +1,9 @@
 # Nextcloud
 
+
+![Nextcloud Dash](images/nextcloud.png)
+
+
 My self-hosted cloud storage. Runs as a TurnKey LXC on Proxmox basically my own private Google Drive. All my files and photos stay on my hardware, nothing goes to a third party
 
 ## Files
