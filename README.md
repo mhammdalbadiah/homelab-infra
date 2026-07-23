@@ -11,7 +11,7 @@ Production-grade self-hosted infrastructure running on bare-metal hardware in Ri
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────────┐
 │                        TP-Link TL-SG108E                           │
 │                      Managed Gigabit Switch                        │
 │               (VLAN segmentation · 8-port GbE)                     │
