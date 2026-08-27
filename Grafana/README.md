@@ -53,8 +53,11 @@ mkdir -p /opt/monitoring && cd /opt/monitoring
 docker compose up -d
 ```
 
+## install Node exporter on proxmox host : 
 
-
+```sh
+apt update && apt install -y prometheus-node-exporter
+```
 
 
 
