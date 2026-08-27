@@ -45,10 +45,13 @@ docker compose version
 
 ```sh
 mkdir -p /opt/monitoring && cd /opt/monitoring
+``` 
+
+## Once u create 2 files , Launch the stack : 
+
+```sh
+docker compose up -d
 ```
-
-# Now Create prometheus.yml & docker-compose.yml files 
-
 
 
 
